@@ -1,0 +1,21 @@
+{
+    "name": "weiyixmm/yaf",
+    "description": "custom yaf framework.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Weiyixmm",
+            "email": "634482545@qq.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/application/"
+        }
+    },
+
+    "require": {
+        "monolog/monolog": "^1.13"
+    }
+}
