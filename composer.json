@@ -1,6 +1,7 @@
 {
     "name": "weiyixmm/yaf",
     "description": "custom yaf framework.",
+    "license": "MIT",
     "type": "project",
     "authors": [
         {
