@@ -17,8 +17,8 @@
     },
 
     "require": {
-        "php": ">=7.0",
-        "ext-yaf": "*",
-        "monolog/monolog": "^1.13"
+        "php": ">=7.2",
+        "monolog/monolog": "^1.13",
+        "hassankhan/config": "0.8.*"
     }
 }
