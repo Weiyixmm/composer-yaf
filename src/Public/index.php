@@ -6,7 +6,7 @@ define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../'));
 include dirname(APPLICATION_PATH) . '/vendor/autoload.php';
 include APPLICATION_PATH . '/application/Initialization.php';
 
-$application = new \Yaf\Application( APPLICATION_PATH . '/conf/application.ini', 'product');
+$application = new \Yaf\Application( APPLICATION_PATH . '/Conf/application.ini', 'product');
 
 $application->bootstrap()->run();
 ?>

@@ -9,10 +9,22 @@
 
 namespace App\Library;
 
+use Monolog\Logger;
+
+/**
+ * Class Registry
+ *
+ * @method Logger Applog()
+ * @method Logger Sqllog()
+ * @method Logger UidProcessor()
+ * @method \Noodlehaus\Config Config()
+ *
+ * @package App\Library
+ */
 class Registry
 {
     public function __call($name, $args = [])
     {
-	    return \Yaf\Registry::get(strtolower($name)) ?: \Yaf\Registry::get(strtolower($name));
+	    return \Yaf\Registry::get(strtolower($name));
     }
 }

@@ -15,29 +15,46 @@ function App()
     return \Yaf\Application::app();
 }
 
+
+/**
+ * @return App\Library\Registry
+ */
 function Registry()
 {
     return \Yaf\Registry::get('registry');
 }
 
+/**
+ * @return Monolog\Logger
+ */
 function Applog()
 {
     return Registry()->Applog();
 }
 
+/**
+ * @return Monolog\Logger
+ */
 function Sqllog()
 {
     return Registry()->Sqllog();
 }
 
+/**
+ * @return Monolog\Logger
+ */
 function UidProcessor()
 {
     return  Registry()->UidProcessor();
 }
 
-function Config($configName = null)
+/**
+ * @param $configName
+ * @return array|mixed|string|null
+ */
+function Config($configName)
 {
-    return is_null($configName) ? Registry()->Config()->get() : Registry()->Config()->get($configName);
+    return $configName ? Registry()->Config()->get($configName) : '';
 }
 
 function Env($configName = 'env')

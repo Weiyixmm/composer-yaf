@@ -17,6 +17,8 @@ return [
                         DIRECTORY_SEPARATOR .
                         'app' .
                         DIRECTORY_SEPARATOR .
+                        date('Ymd') .
+                        DIRECTORY_SEPARATOR .
                         'app.log',
             'level'  => \Monolog\Logger::INFO,
             'bubble' => true,
@@ -29,7 +31,9 @@ return [
                         DIRECTORY_SEPARATOR .
                         'sql' .
                         DIRECTORY_SEPARATOR .
-                        'app.log',
+                        date('Ymd') .
+                        DIRECTORY_SEPARATOR .
+                        'sql.log',
             'level'  => \Monolog\Logger::DEBUG,
             'bubble' => false,
         ],

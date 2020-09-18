@@ -10,33 +10,30 @@
  */
 class Bootstrap extends \Yaf\Bootstrap_Abstract
 {
-    private $_config;
+    public function _initRegistry()
+    {
+        \Yaf\Registry::set('registry', new \App\Library\Registry());
+    }
 
     public function _initConfig()
     {
         $configPath = \Yaf\Application::app()->getConfig()['application']['configDir'] ?? APPLICATION_PATH . '/conf/';
 
-        $this->_config = new \Noodlehaus\Config(
-            [
-                $configPath . Env(),
-            ]
-        );
-
-        \Yaf\Registry::set("config", $this->_config);
+        \Yaf\Registry::set("config", new \Noodlehaus\Config([$configPath . Env()]));
     }
 
     public function _initLog()
     {
         try {
             # application log
-            $logger = new \Monolog\Logger($this->_config['logger']['app']['name']);
+            $logger = new \Monolog\Logger(Config('logger.app.name'));
             $uidProcessor = new \Monolog\Processor\UidProcessor(32);
             $logger->pushProcessor(new \Monolog\Processor\IntrospectionProcessor());
             $logger->pushProcessor($uidProcessor);
             $stream = new \Monolog\Handler\StreamHandler(
-                $this->_config['logger']['app']['path'] . '.' . date('Ymd'),
-                $this->_config['logger']['app']['level'],
-                $this->_config['logger']['app']['bubble'],
+                Config('logger.app.path'),
+                Config('logger.app.level'),
+                Config('logger.app.bubble'),
                 0766
             );
             $logger->pushHandler($stream);
@@ -44,13 +41,13 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
             \Yaf\Registry::set("uidprocessor", $uidProcessor);
 
             # sql log
-            $logger = new \Monolog\Logger($this->_config['logger']['sql']['name']);
+            $logger = new \Monolog\Logger(Config('logger.sql.name'));
             $logger->pushProcessor(new \Monolog\Processor\IntrospectionProcessor());
             $logger->pushProcessor($uidProcessor);
             $stream = new \Monolog\Handler\StreamHandler(
-                $this->_config['logger']['sql']['path'] . '.' . date('Ymd'),
-                $this->_config['logger']['sql']['level'],
-                $this->_config['logger']['sql']['bubble'],
+                Config('logger.sql.path'),
+                Config('logger.sql.level'),
+                Config('logger.sql.bubble'),
                 0766
             );
 
@@ -76,10 +73,5 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract
     public function _initView(\Yaf\Dispatcher $dispatcher)
     {
         //在这里注册自己的view控制器，例如smarty,firekylin
-    }
-
-    public function _initRegistry()
-    {
-        \Yaf\Registry::set('registry', new \App\Library\Registry());
     }
 }
